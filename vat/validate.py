@@ -149,9 +149,6 @@ def validate(s, external_validation=False):
     s = s.replace(' ', '')
     s = s.upper()
 
-    if len(s) < 2:
-        return False
-
     country_code = s[:2]
 
     if not VAT.has_key(country_code):
