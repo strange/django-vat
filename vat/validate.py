@@ -183,8 +183,8 @@ def eu_validation(country_code, vat_number):
     try:
         import suds
     except ImportError:
-        raise ImportError("suds is require to validate against the European "
-                          "Commission's web service.")
+        raise ImportError("suds is required to validate against the "
+                          "European Commission's web service.")
 
     c = suds.client.Client(WSDL)
     try:
