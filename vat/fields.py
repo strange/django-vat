@@ -13,8 +13,12 @@ class VATField(forms.CharField):
         super(VATField, self).__init__(required=required, min_length=3)
 
     def clean(self, value):
-        is_valid, vat_number = validate.validate(value,
-                                                 self.external_validation)
+        try:
+            is_valid, vat_number = validate.validate(value,
+                                                     self.external_validation)
+        except validate.CommunicationError:
+            raise forms.ValidationError(u"Unable to contact VAT validation "
+                                        u"service.")
         if not is_valid:
             raise forms.ValidationError(u"Not a valid VAT number.")
 

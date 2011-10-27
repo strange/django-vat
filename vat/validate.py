@@ -1,4 +1,5 @@
 import re
+import urllib2
 
 def dk_format(v):
     return '%s %s %s %s' % (v[:4], v[4:6], v[6:8], v[8:10])
@@ -186,7 +187,7 @@ def eu_validation(country_code, vat_number):
     c = suds.client.Client(WSDL)
     try:
         v = c.service.checkVat(country_code, vat_number)
-    except suds.WebFault:
+    except (suds.WebFault, urllib2.URLError):
         raise CommunicationError()
 
     # there are some pretty interesting properties attached to the validation
