@@ -13,6 +13,9 @@ class VATField(forms.CharField):
         super(VATField, self).__init__(required=required, min_length=3)
 
     def clean(self, value):
+        if not value:
+            return value
+
         try:
             is_valid, vat_number = validate.validate(value,
                                                      self.external_validation)
