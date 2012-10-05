@@ -186,7 +186,7 @@ def eu_validation(country_code, vat_number):
 
     c = suds.client.Client(WSDL)
     try:
-        v = c.service.checkVat(country_code, vat_number)
+        v = c.service.checkVat(country_code, vat_number.replace(' ', ''))
     except (suds.WebFault, urllib2.URLError):
         raise CommunicationError()
 
