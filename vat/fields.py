@@ -8,9 +8,10 @@ class VATField(forms.CharField):
     >>> f.clean("SE556056625801")
     'SE556056625801'
     """
-    def __init__(self, external_validation=False, required=True):
+    def __init__(self, external_validation=False, *args, **kwargs):
         self.external_validation = external_validation
-        super(VATField, self).__init__(required=required, min_length=3)
+        kwargs['min_length'] = 3
+        super(VATField, self).__init__(*args, **kwargs)
 
     def clean(self, value):
         if not value:
